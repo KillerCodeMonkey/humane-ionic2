@@ -36,7 +36,6 @@ export class RegisterModalComponent implements OnInit {
 
   close() {
     this.viewCtrl.dismiss();
-    console.log('schließen');
   }
 
   ngOnInit() {

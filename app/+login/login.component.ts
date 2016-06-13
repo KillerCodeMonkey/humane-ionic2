@@ -46,6 +46,7 @@ export class LoginComponent implements OnInit {
     const alert = Alert.create({
       title: 'Register',
       message: 'Do you want to register as NGO?',
+      enableBackdropDismiss: false,
       buttons: [
         {
           text: 'No',
