@@ -1,0 +1,29 @@
+<ion-toolbar>
+  <ion-title>Humane</ion-title>
+</ion-toolbar>
+<ion-content>
+  <form [ngFormModel]="form" (submit)="tac.value && form.valid && login(form.value)">
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Login</ion-label>
+        <ion-input type="email" ngControl="login"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Password</ion-label>
+        <ion-input type="password" ngControl="password"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label><small>Accept terms and conditions</small></ion-label>
+        <ion-checkbox ngControl="tac" #tac="ngForm"></ion-checkbox>
+      </ion-item>
+      <div padding>
+        <button block [disabled]="!form.valid || !tac.value || alertOpen">Login</button>
+        <button block type="button" (click)="chooseRegistration()" [disabled]="alertOpen">Register</button>
+      </div>
+    </ion-list>
+  </form>
+  <div padding>
+    <button block>FB</button>
+    <button block>Twitter</button>
+  </div>
+</ion-content>
