@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {NavController} from 'ionic-angular';
-import {MenuController} from 'ionic-angular';
+import {MenuController, NavController} from 'ionic-angular';
 
 @Component({
   templateUrl: 'build/+home/home.component.html'

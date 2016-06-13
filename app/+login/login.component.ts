@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from 'ionic-angular';
 import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
-import {Alert, MenuController} from 'ionic-angular';
+import {Alert, MenuController, Modal} from 'ionic-angular';
 
 import {AuthService} from '../shared/index';
 import {Login} from '../shared/index';
 
 import {HomeComponent} from '../+home/index';
+import {RegisterModalComponent} from '../+register/index';
 
 @Component({
   templateUrl: 'build/+login/login.component.html'
@@ -50,6 +51,9 @@ export class LoginComponent implements OnInit {
           text: 'No',
           handler: () => {
             this.alertOpen = false;
+            const register = Modal.create(RegisterModalComponent, {isNGO: false});
+
+            this.nav.present(register);
             // TODO: show ordinary registration
           }
         },
@@ -57,6 +61,9 @@ export class LoginComponent implements OnInit {
           text: 'Yes',
           handler: () => {
             this.alertOpen = false;
+            const register = Modal.create(RegisterModalComponent, {isNGO: true});
+
+            this.nav.present(register);
             // TODO: show NGO registration
           }
         }, {

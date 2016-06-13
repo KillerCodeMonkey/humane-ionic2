@@ -1,0 +1,24 @@
+<ion-toolbar>
+  <ion-title>Registration</ion-title>
+</ion-toolbar>
+<ion-content>
+  <form [ngFormModel]="form" id="register">
+    <ion-list>
+      <ion-item *ngFor="let name of controlNames">
+        <ion-label floating>{{name}}</ion-label>
+        <ion-input [ngControl]="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Tags</ion-label>
+        <ion-textarea rows="3" ngControl="tags"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label>Accept terms and conditions</ion-label>
+        <ion-checkbox ngControl="tac"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-toolbar position="bottom">
+  <button block for="register">Register</button>
+</ion-toolbar>
