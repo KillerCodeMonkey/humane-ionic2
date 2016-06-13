@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Control, ControlGroup, FormBuilder, Validators} from '@angular/common';
-import {NavParams} from 'ionic-angular';
+import {NavParams, ViewController} from 'ionic-angular';
 
 const basicControls = {
   name: ['', Validators.required],
@@ -24,13 +24,19 @@ export class RegisterModalComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private params: NavParams
+    private params: NavParams,
+    private viewCtrl: ViewController
   ) {
     this.isNGO = this.params.get('isNGO');
 
     this.controlNames = Object.keys(this.isNGO ? ngoControls : basicControls);
     this.controlNames.splice(this.controlNames.length - 2, 2);
     this.form = this.fb.group(this.isNGO ? ngoControls : basicControls);
+  }
+
+  close() {
+    this.viewCtrl.dismiss();
+    console.log('schließen');
   }
 
   ngOnInit() {
