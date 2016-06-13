@@ -2,7 +2,7 @@
   <ion-title>Humane</ion-title>
 </ion-toolbar>
 <ion-content>
-  <form [ngFormModel]="form" (submit)="tac.value && form.valid && login(form.value)">
+  <form [ngFormModel]="form" (submit)="tac.value && form.valid && login(form.value)" novalidate>
     <ion-list>
       <ion-item>
         <ion-label floating>Login</ion-label>
