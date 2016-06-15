@@ -3,14 +3,12 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/toPromise';
 
-import {Login} from '../shared/index';
-import {Register} from '../shared/index';
+import {Login, Register, User} from '../shared/index';
 
 @Injectable()
 export class AuthService {
-  private currentLogin: Login;
 
-  login(data: Login) {
+  login(data: Login): Promise<User> {
     return Observable
       .of({
         status: 200,
@@ -19,7 +17,11 @@ export class AuthService {
           name: 'John Doe'
         }
       })
-      .toPromise();
+      .toPromise()
+      .then((response) => {
+        window.localStorage.setItem('user', JSON.stringify(response.data));
+        return response.data;
+      });
   }
 
   register(data: Register) {
@@ -34,7 +36,11 @@ export class AuthService {
       .toPromise();
   }
 
-  getLogin() {
-    return this.currentLogin;
+  logout() {
+    window.localStorage.clear();
+  }
+
+  getLogin(): User {
+    return JSON.parse(window.localStorage.getItem('user'));
   }
 }

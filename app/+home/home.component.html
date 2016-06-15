@@ -5,12 +5,11 @@
   <ion-title>EVENTS</ion-title>
 </ion-navbar>
 
+<ion-searchbar [(ngModel)]="searchString">
+</ion-searchbar>
 
-<ion-content padding class="getting-started">
+<ion-content class="getting-started">
 
-  <h3>Welcome to Ionic</h3>
-  <p>Want to learn some facts?  Click below.</p>
-  <button (click)="goToFactsPage()">Scientific Facts</button>
-  <button secondary menuToggle>Toggle Menu</button>
+  <div google-maps></div>
 
 </ion-content>

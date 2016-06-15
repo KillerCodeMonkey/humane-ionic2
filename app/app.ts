@@ -5,8 +5,9 @@ import {StatusBar} from 'ionic-native';
 import {GettingStartedPage} from './pages/getting-started/getting-started';
 import {ListPage} from './pages/list/list';
 import {LoginComponent} from './+login/login.component';
+import {HomeComponent} from './+home/home.component';
 
-import {AuthService} from './shared/index';
+import {AuthService, User} from './shared/index';
 
 
 @Component({
@@ -15,10 +16,18 @@ import {AuthService} from './shared/index';
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = LoginComponent;
+  rootPage: any;
   pages: Array<{title: string, component: any}>
 
-  constructor(private platform: Platform) {
+  constructor(private platform: Platform, auth: AuthService) {
+    const currentUser = auth.getLogin();
+
+    if (currentUser && currentUser.email) {
+      this.rootPage = HomeComponent;
+    } else {
+      this.rootPage = LoginComponent;
+    }
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
