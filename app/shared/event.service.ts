@@ -7,7 +7,7 @@ import {Event} from '../shared/index';
 
 @Injectable()
 export class EventService {
-  getEvents(): Promise<Event[]> {
+  get(): Observable<Event[]> {
     return Observable
       .of([{
         name: 'My first Event',
@@ -19,7 +19,16 @@ export class EventService {
         lat: 110.5,
         lng: 112.8,
         description: 'Amazing Event 2'
-      }])
-      .toPromise();;
+      }]);
+  }
+
+  search(searchString: string): Observable<Event[]> {
+    return Observable
+      .of([{
+        name: 'My first Event',
+        lat: 110,
+        lng: 112,
+        description: 'Amazing Event'
+      }]);
   }
 }

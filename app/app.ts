@@ -7,7 +7,7 @@ import {ListPage} from './pages/list/list';
 import {LoginComponent} from './+login/login.component';
 import {HomeComponent} from './+home/home.component';
 
-import {AuthService, User} from './shared/index';
+import {AuthService, EventService, User} from './shared/index';
 
 
 @Component({
@@ -53,4 +53,4 @@ class MyApp {
   }
 }
 
-ionicBootstrap(MyApp, [AuthService]);
+ionicBootstrap(MyApp, [AuthService, EventService]);

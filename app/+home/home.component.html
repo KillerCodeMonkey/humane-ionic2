@@ -5,7 +5,13 @@
   <ion-title>EVENTS</ion-title>
 </ion-navbar>
 
-<ion-searchbar [(ngModel)]="searchString">
+<ion-searchbar
+  [(ngModel)]="searchString"
+  (ionInput)="onInput($event)"
+  (ionClear)="cancel()"
+  (ionAbort)="cancel()"
+  debounce="500"
+>
 </ion-searchbar>
 
 <ion-content class="getting-started">
