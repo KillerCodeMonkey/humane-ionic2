@@ -4,6 +4,7 @@ import {
   EventEmitter,
   Input,
   OnChanges,
+  OnDestroy,
   OnInit,
   Output,
   SimpleChange
@@ -15,11 +16,11 @@ import {Event} from './event.model';
 @Directive({
   selector: '[google-maps]'
 })
-export class GoogleMapsDirective implements OnInit, OnChanges {
+export class GoogleMapsDirective implements OnInit, OnChanges, OnDestroy {
   map;
   markers = [];
   @Input() events: Event[] = [];
-  @Output() markerClicked = new EventEmitter();
+  @Output() markerClicked = new EventEmitter<Event>();
 
   constructor(private elementRef: ElementRef) {}
 
@@ -44,27 +45,44 @@ export class GoogleMapsDirective implements OnInit, OnChanges {
     if (!this.map) {
       return;
     }
+
     this.setMarkers();
+  }
+
+  ngOnDestroy() {
+    this.clearMarkers();
   }
 
   setMarkers() {
     let marker;
-
     this.clearMarkers();
 
     for (let i = 0; i < this.events.length; i = i + 1) {
       marker = new google.maps.Marker({
-        animation: google.maps.Animation.DROP,
-        position: new google.maps.LatLng(this.events[i].lat, this.events[i].lng),
+        position: {lat: this.events[i].lat, lng: this.events[i].lng},
         map: this.map
       });
+      // add additional data to marker
+      marker.eventData = this.events[i];
+
+      marker.listener = marker.addListener('click', () => {
+        this.map.setZoom(20);
+        this.map.setCenter(marker.getPosition());
+
+        this.markerClicked.emit(marker.eventData);
+      });
       this.markers.push(marker);
+    }
+
+    if (this.markers.length) {
+      this.map.setCenter(this.markers[0].getPosition());
     }
   }
 
   clearMarkers() {
     for (let i = 0; i < this.markers.length; i = i + 1) {
-      this.markers.setMap(null);
+      this.markers[i].listener.remove();
+      this.markers[i].setMap(null);
     }
 
     this.markers = [];

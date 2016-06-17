@@ -5,30 +5,33 @@ import 'rxjs/add/operator/toPromise';
 
 import {Event} from '../shared/index';
 
+const events = [{
+  id: 1,
+  name: 'My first Event',
+  lat: -34.95,
+  lng: 138.5999,
+  description: 'Amazing Event'
+}, {
+  id: 2,
+  name: 'My second Event',
+  lat: -34.98,
+  lng: 138.5999,
+  description: 'Amazing Event 2'
+}];
+
 @Injectable()
 export class EventService {
   get(): Observable<Event[]> {
     return Observable
-      .of([{
-        name: 'My first Event',
-        lat: 110,
-        lng: 112,
-        description: 'Amazing Event'
-      }, {
-        name: 'My second Event',
-        lat: 110.5,
-        lng: 112.8,
-        description: 'Amazing Event 2'
-      }]);
+      .of(events);
   }
 
   search(searchString: string): Observable<Event[]> {
     return Observable
-      .of([{
-        name: 'My first Event',
-        lat: 110,
-        lng: 112,
-        description: 'Amazing Event'
-      }]);
+      .of([events[0]]);
+  }
+
+  getById(id: number): Observable<Event> {
+    return Observable.of(events[id - 1])
   }
 }

@@ -1,15 +1,16 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {MenuController, NavController} from 'ionic-angular';
 import {Observable, Subscribable} from 'rxjs/Observable';
 import 'rxjs/add/operator/last';
 
 import {GoogleMapsDirective, Event, EventService} from '../shared/index';
+import {EventComponent} from '../+event/index';
 
 @Component({
   templateUrl: 'build/+home/home.component.html',
   directives: [GoogleMapsDirective]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   events: Event[] = [];
   searchString: string;
   oldSearchString: string;
@@ -20,29 +21,35 @@ export class HomeComponent implements OnInit {
     private menu: MenuController,
     private nav: NavController,
     private eventService: EventService
-  ) {
-    this.eventSource = this.eventService.get();
-  }
+  ) {}
 
-  ngOnInit() {
+  ionViewDidEnter() {
     this.menu.enable(true, 'left');
 
-    this.eventSource.subscribe(events => {
+    this.eventSource = this.eventService.get().subscribe(events => {
       this.events = events;
     });
+  }
+
+  ionViewWillLeave() {
+    this.eventSource.unsubscribe();
+    this.unsubscribe();
   }
 
   onInput() {
     if (this.searchString === this.oldSearchString) {
       return;
     }
+
+    this.oldSearchString = this.searchString;
+
     if (!this.searchString) {
       this.cancel();
+      return;
     }
 
     this.unsubscribe();
 
-    this.oldSearchString = this.searchString;
     this.eventSearch = this.eventService
       .search(this.searchString)
       .last()
@@ -52,9 +59,17 @@ export class HomeComponent implements OnInit {
   }
 
   cancel() {
+    this.oldSearchString = null;
     this.unsubscribe();
-    this.eventService
-      .get();
+    this.eventService.get().subscribe(events => {
+      this.events = events;
+    });
+  }
+
+  showDetail(event) {
+    this.nav.push(EventComponent, {
+      id: event.id
+    });
   }
 
   private unsubscribe() {

@@ -16,6 +16,6 @@
 
 <ion-content class="getting-started">
 
-  <div google-maps></div>
+  <div google-maps [events]="events" (markerClicked)="showDetail($event)"></div>
 
 </ion-content>
