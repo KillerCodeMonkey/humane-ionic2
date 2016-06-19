@@ -6,7 +6,7 @@ import {Alert, MenuController, Modal} from 'ionic-angular';
 import {AuthService} from '../shared/index';
 import {Login} from '../shared/index';
 
-import {HomeComponent} from '../+home/index';
+import {EventsComponent} from '../+events/index';
 import {RegisterModalComponent} from '../+register/index';
 
 @Component({
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
   login(data: Login) {
     this.authService.login(data).then(() => {
-      this.nav.setRoot(HomeComponent);
+      this.nav.setRoot(EventsComponent);
     });
   }
 

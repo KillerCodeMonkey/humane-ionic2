@@ -1,0 +1,1 @@
+export {NewEventModalComponent} from './new-event-modal.component';

@@ -1,0 +1,43 @@
+<ion-toolbar>
+  <ion-buttons start>
+    <button (click)="close()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+  <ion-title>Create new event</ion-title>
+</ion-toolbar>
+<ion-content>
+  <form [ngFormModel]="form" id="create" (submit)="form.valid && createEvent(form.value)" novalidate>
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Title</ion-label>
+        <ion-input ngControl="name" type="text"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Date</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY" ngControl="date" [min]="startDate" [max]="endDate" placeholder="Date"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Where</ion-label>
+        <ion-input rows="3" ngControl="address" [readonly]="geocoding"></ion-input>
+      </ion-item>
+      <ion-item *ngIf="addresses.length">
+        <ion-label floating>Choose Address</ion-label>
+        <ion-select [(ngModel)]="addressChooser" (ionChange)="handleAddressChange(addressChooser)">
+          <ion-option *ngFor="let address of addresses" [value]="address">{{address.formatted_address}}</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Description</ion-label>
+        <ion-textarea rows="3" ngControl="description"></ion-textarea>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Tags</ion-label>
+        <ion-input ngControl="tags" type="text"></ion-input>
+      </ion-item>
+    </ion-list>
+  </form>
+</ion-content>
+<ion-toolbar position="bottom">
+  <button block for="create" [disabled]="!form.valid" (click)="createEvent(form.value)">create</button>
+</ion-toolbar>

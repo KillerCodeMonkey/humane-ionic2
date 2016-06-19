@@ -2,10 +2,8 @@ import {Component, ViewChild} from '@angular/core';
 import {App, ionicBootstrap, Platform, Nav} from 'ionic-angular';
 import {StatusBar} from 'ionic-native';
 
-import {GettingStartedPage} from './pages/getting-started/getting-started';
-import {ListPage} from './pages/list/list';
 import {LoginComponent} from './+login/login.component';
-import {HomeComponent} from './+home/home.component';
+import {EventsComponent} from './+events/events.component';
 
 import {AuthService, EventService, User} from './shared/index';
 
@@ -17,13 +15,13 @@ class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any;
-  pages: Array<{title: string, component: any}>
+  pages: Array<{title: string}>
 
   constructor(private platform: Platform, auth: AuthService) {
     const currentUser = auth.getLogin();
 
     if (currentUser && currentUser.email) {
-      this.rootPage = HomeComponent;
+      this.rootPage = EventsComponent;
     } else {
       this.rootPage = LoginComponent;
     }
@@ -32,8 +30,8 @@ class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Getting Started', component: GettingStartedPage },
-      { title: 'List', component: ListPage }
+      { title: 'Getting Started' },
+      { title: 'List' }
     ];
 
   }

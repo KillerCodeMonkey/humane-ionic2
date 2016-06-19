@@ -30,6 +30,7 @@ export class GoogleMapsDirective implements OnInit, OnChanges, OnDestroy {
     const mapOptions = {
       center: latLng,
       zoom: 15,
+      disableDefaultUI: true,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     }
 
@@ -41,7 +42,7 @@ export class GoogleMapsDirective implements OnInit, OnChanges, OnDestroy {
     this.setMarkers();
   }
 
-  ngOnChanges(changes: {[prop: string]: SimpleChange}) {
+  ngOnChanges(changes) {
     if (!this.map) {
       return;
     }

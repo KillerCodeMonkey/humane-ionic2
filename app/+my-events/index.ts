@@ -1,0 +1,1 @@
+export {MyEventsComponent} from './my-events.component';

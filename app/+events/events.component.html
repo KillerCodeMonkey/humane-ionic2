@@ -2,7 +2,7 @@
   <button menuToggle>
     <ion-icon name="menu"></ion-icon>
   </button>
-  <ion-title>EVENTS</ion-title>
+  <ion-title>Humane</ion-title>
 </ion-navbar>
 
 <ion-searchbar
@@ -14,8 +14,9 @@
 >
 </ion-searchbar>
 
-<ion-content class="getting-started">
-
+<ion-content>
   <div google-maps [events]="events" (markerClicked)="showDetail($event)"></div>
-
+  <button (click)="openNewModal()" style="position: absolute; bottom: 20px; right: 20px;border-radius: 50%; width:70px;height: 70px;">
+    <ion-icon name="add" style="font-size: 34px;"></ion-icon>
+  </button>
 </ion-content>
