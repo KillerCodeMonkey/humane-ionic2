@@ -1,11 +1,13 @@
-<ion-toolbar>
-  <ion-buttons start>
-    <button (click)="close()">
-      <ion-icon name="close"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-title>Create new event</ion-title>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Create new event</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <form [ngFormModel]="form" id="create" (submit)="form.valid && createEvent(form.value)" novalidate>
     <ion-list>
@@ -38,6 +40,8 @@
     </ion-list>
   </form>
 </ion-content>
-<ion-toolbar position="bottom">
-  <button block for="create" [disabled]="!form.valid" (click)="createEvent(form.value)">create</button>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar position="bottom">
+    <button block for="create" [disabled]="!form.valid" (click)="createEvent(form.value)">create</button>
+  </ion-toolbar>
+</ion-footer>

@@ -1,8 +1,9 @@
 <ion-menu [content]="content">
-
-  <ion-toolbar>
-    <ion-title>Pages</ion-title>
-  </ion-toolbar>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Pages</ion-title>
+    </ion-toolbar>
+  </ion-header>
 
   <ion-content>
     <ion-list>
@@ -11,7 +12,6 @@
       </button>
     </ion-list>
   </ion-content>
-
 </ion-menu>
 
 <ion-nav id="nav" [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

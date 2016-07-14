@@ -15,7 +15,7 @@ const basicControls = {
 const ngoControls = Object.assign({}, basicControls, {license: ['', Validators.required]});
 
 @Component({
-  templateUrl: 'build/+register-modal/register-model.component.html'
+  templateUrl: 'build/+register/register-modal.component.html'
 })
 export class RegisterModalComponent implements OnInit {
   form: ControlGroup;

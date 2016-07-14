@@ -1,11 +1,13 @@
-<ion-toolbar>
-  <ion-buttons start>
-    <button (click)="close()">
-      <ion-icon name="close"></ion-icon>
-    </button>
-  </ion-buttons>
-  <ion-title>Registration</ion-title>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons start>
+      <button (click)="close()">
+        <ion-icon name="close"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <form [ngFormModel]="form" id="register" (ngSubmit)="form.valid && form.value.tac">
     <ion-list>
@@ -24,6 +26,8 @@
     </ion-list>
   </form>
 </ion-content>
-<ion-toolbar position="bottom">
-  <button block for="register" [disabled]="!form.valid || !form.value.tac">Register</button>
-</ion-toolbar>
+<ion-footer>
+  <ion-toolbar position="bottom">
+    <button block for="register" [disabled]="!form.valid || !form.value.tac">Register</button>
+  </ion-toolbar>
+</ion-footer>

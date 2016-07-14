@@ -1,6 +1,8 @@
-<ion-toolbar>
-  <ion-title>Humane</ion-title>
-</ion-toolbar>
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Humane</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <form [ngFormModel]="form" (submit)="tac.value && form.valid && login(form.value)" novalidate>
     <ion-list>
